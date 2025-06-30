@@ -13,14 +13,13 @@ def pin_to_ipfs(data):
 		"Content-Type": "application/json",
 		"pinata_api_key": PINATA_API_KEY,
 		"pinata_secret_api_key": PINATA_SECRET_API_KEY,
-  }
-
-  response = requests.post(PINATA_BASE_URL, data=json.dumps({"pinataContent": data}), headers=headers)
-
-  if response.status_code != 200:
-      raise Exception(f"Failed to pin JSON to IPFS: {response.text}")
-
-  cid = response.json()["IpfsHash"]
+	}
+	
+	response = requests.post(PINATA_BASE_URL, data=json.dumps({"pinataContent": data}), headers=headers)
+	if response.status_code != 200:
+		raise Exception(f"Failed to pin JSON to IPFS: {response.text}")
+		
+	cid = response.json()["IpfsHash"]
 
 	return cid
 
