@@ -4,8 +4,7 @@ import json
 def pin_to_ipfs(data):
 	assert isinstance(data,dict), f"Error pin_to_ipfs expects a dictionary"
 	#YOUR CODE HERE
-  	cid = data["cid"]
-
+	cid = data["cid"]
 	return cid
 
 def get_from_ipfs(cid,content_type="json"):
