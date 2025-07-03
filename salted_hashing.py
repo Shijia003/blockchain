@@ -3,9 +3,10 @@ import os
 
 def my_hash(m):
     #Generate random nonce
-    nonce = str(random.randint(0, 1_000_000_000))
+    nonce = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
     #Generate hex digest
     combined = nonce + m
     hash_object = hashlib.sha256(combined.encode())
     h_hex = hash_object.hexdigest() 
+    assert len(hash_hex) == 64
     return nonce, h_hex
