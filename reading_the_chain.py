@@ -72,6 +72,7 @@ def is_ordered_block(w3, block_num):
 	 #        	priority_fee = tx.gasPrice - base_fee
 		# 	# raise ValueError(f"Unsupported transaction type: {tx.type}")
 		if tx.type == 2:
+			print(tx.type)
 			priority_fee = 0
 		priority_fees.append(priority_fee)
 
