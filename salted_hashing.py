@@ -2,7 +2,7 @@ import hashlib
 import os
 import random
 
-def my_hash(m):
+def myhash(m):
     #Generate random nonce
     nonce = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
     #Generate hex digest
