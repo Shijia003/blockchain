@@ -1,5 +1,6 @@
 import hashlib
 import os
+import random
 
 def my_hash(m):
     #Generate random nonce
