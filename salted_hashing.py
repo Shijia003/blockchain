@@ -2,9 +2,9 @@ import hashlib
 import os
 import random
 
-def myhash(m):
+def my_hash(m):
     #Generate random nonce
-    nonce = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
+    nonce = str(random.randint(0, 100000000))
     #Generate hex digest
     combined = nonce + m
     hash_object = hashlib.sha256(combined.encode())
