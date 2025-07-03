@@ -63,14 +63,14 @@ def is_ordered_block(w3, block_num):
 	priority_fees = []
 
 	for tx in txs:
-		if tx.type is None or base_fee is None:
-			priority_fee = tx.gasPrice
-		elif tx.type == '0x0':
-			priority_fee = tx.gasPrice - base_fee
-		elif tx.type == '0x2':  
-			priority_fee = min(tx.maxPriorityFeePerGas,tx.maxFeePerGas - base_fee)
+	    	# type 2
+		if tx.gasPrice is None:
+	        	priority_fee = min(tx.maxPriorityFeePerGas,tx.maxFeePerGas - base_fee)
+		elif tx.gasPrice is not None and tx.maxPriorityFeePerGas is not None:  
+	        	priority_fee = tx.maxPriorityFeePerGas
 		else:
-			raise ValueError(f"Unsupported transaction type: {tx.type}")
+	        	priority_fee = tx.gasPrice - base_fee
+			# raise ValueError(f"Unsupported transaction type: {tx.type}")
 		priority_fees.append(priority_fee)
 
 	for i in range(1, len(priority_fees)):
