@@ -63,8 +63,10 @@ def is_ordered_block(w3, block_num):
 	priority_fees = []
 
 	for tx in txs:
-		if tx.type is None or tx.type == '0x0' or base_fee is None:
-				priority_fee = tx.gasPrice - base_fee
+		if tx.type is None or base_fee is None:
+				priority_fee = tx.gasPrice
+    		elif tx.type == '0x0':
+        			priority_fee = tx.gasPrice - base_fee
 		elif tx.type == '0x2':  
 				priority_fee = min(
 						tx.maxPriorityFeePerGas,
