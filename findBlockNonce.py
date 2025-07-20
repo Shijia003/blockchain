@@ -25,13 +25,11 @@ def mine_block(k, prev_hash, transactions):
     while True:
         nonce_bytes = str(nonce).encode('utf-8')
         input = prev_hash + txn_bytes + nonce_bytes
-        
         hash_result = hashlib.sha256(input).hexdigest()
-        
         hash_bin = bin(int(hash_result, 16))[2:].zfill(256)
         
         if hash_bin.endswith('0' * k):
-            nounce = nounce_bytes
+            nonce = nonce_bytes
             break
         nonce += 1
 
