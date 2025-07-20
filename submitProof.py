@@ -67,6 +67,10 @@ def convert_leaves(primes_list):
     """
 
     # TODO YOUR CODE HERE
+    leaves = []
+    for i in primes_list:
+        converted = i.to_bytes(32, 'big')
+        leaves.append(converted)
 
     return []
 
