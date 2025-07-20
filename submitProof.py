@@ -103,7 +103,7 @@ def sign_challenge(challenge):
     eth_sk = acct.key
 
     # TODO YOUR CODE HERE
-    eth_sig_obj = 'placeholder'
+    eth_sig_obj = acct.sign_message(eth_account.messages.encode_defunct(text=challenge))
 
     return addr, eth_sig_obj.signature.hex()
 
