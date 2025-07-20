@@ -72,7 +72,7 @@ def convert_leaves(primes_list):
         converted = i.to_bytes(32, 'big')
         leaves.append(converted)
 
-    return []
+    return leaves
 
 
 def build_merkle(leaves):
