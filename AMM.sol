@@ -69,7 +69,7 @@ contract AMM is AccessControl{
     }
 
 		uint256 fee = (swapAmt * feebps) / 10000;
-		unit256 buyAmt = swapAmt - fee;
+		uint256 buyAmt = swapAmt - fee;
 
 		ERC20(sellToken).transferFrom(msg.sender, address(this), sellAmount);
 		ERC20(buyToken).transfer(msg.sender, buyAmt);
