@@ -31,8 +31,6 @@ contract Source is AccessControl {
 
 	function withdraw(address _token, address _recipient, uint256 _amount ) onlyRole(WARDEN_ROLE) public {
 		//YOUR CODE HERE
-    uint256 balance = token.balanceOf(address(this));
-    require(balance >= _amount, "There is not enough balance in the contract");
     require(ERC20(_token).transfer(_recipient, _amount), "Transfer failed");
 		emit Withdrawal(_token, _recipient, _amount);
 	}
