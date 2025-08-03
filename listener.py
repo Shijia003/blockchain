@@ -66,8 +66,6 @@ def scan_blocks(chain, start_block, end_block, contract_address, eventfile='depo
                 'address': evt.address,
                 'date': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
             }
-            # with open(eventfile, 'a') as file:
-            #     file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
             all_events.append(data)
     else:
         for block_num in range(start_block,end_block+1):
@@ -85,8 +83,6 @@ def scan_blocks(chain, start_block, end_block, contract_address, eventfile='depo
                     'address': evt.address,
                     'date': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
                 }
-                # with open(eventfile, 'a') as file:
-                #     file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
                 all_events.append(data)
                 
     df = pd.DataFrame(all_events, columns=["chain", "token", "recipient", "amount", "transactionHash", "address","date"])
