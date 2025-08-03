@@ -50,6 +50,7 @@ def scan_blocks(chain, start_block, end_block, contract_address, eventfile='depo
     else:
         print( f"Scanning blocks {start_block} - {end_block} on {chain}" )
 
+    all_events = []
     if end_block - start_block < 30:
         event_filter = contract.events.Deposit.create_filter(from_block=start_block,to_block=end_block,argument_filters=arg_filter)
         events = event_filter.get_all_entries()
@@ -65,9 +66,9 @@ def scan_blocks(chain, start_block, end_block, contract_address, eventfile='depo
                 'address': evt.address,
                 'date': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
             }
-            with open(eventfile, 'a') as file:
-                file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
-
+            # with open(eventfile, 'a') as file:
+            #     file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
+            all_events.append(data)
     else:
         for block_num in range(start_block,end_block+1):
             event_filter = contract.events.Deposit.create_filter(from_block=block_num,to_block=block_num,argument_filters=arg_filter)
@@ -84,5 +85,9 @@ def scan_blocks(chain, start_block, end_block, contract_address, eventfile='depo
                     'address': evt.address,
                     'date': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
                 }
-                with open(eventfile, 'a') as file:
-                    file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
+                # with open(eventfile, 'a') as file:
+                #     file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
+                all_events.append(data)
+                
+    df = pd.DataFrame(data, columns=["chain", "token", "recipient", "amount", "transactionHash", "address"])
+    df.to_csv(eventfile, index=False)
