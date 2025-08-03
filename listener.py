@@ -89,5 +89,5 @@ def scan_blocks(chain, start_block, end_block, contract_address, eventfile='depo
                 #     file.write(f"{data['chain']},{data['token']},{data['recipient']},{data['amount']},{data['transactionHash']},{data['address']},{data['date']}\n")
                 all_events.append(data)
                 
-    df = pd.DataFrame(data, columns=["chain", "token", "recipient", "amount", "transactionHash", "address"])
+    df = pd.DataFrame(all_events, columns=["chain", "token", "recipient", "amount", "transactionHash", "address","date"])
     df.to_csv(eventfile, index=False)
